@@ -1,5 +1,6 @@
 'use client'
 import React, { useState } from 'react';
+import { Stack, Input } from '@chakra-ui/react'
 
 const UserDashboard = ({ initialUsers }) => {
     const [users, setUsers] = useState(initialUsers || []);
@@ -95,14 +96,16 @@ const handleSave = async () => {
     return (
         <div>
             <h1>Dashboard</h1>
-            <input type="text" name="username" value={formData.username} onChange={handleInputChange} placeholder="Username" required />
-            <input type="email" name="email" value={formData.email} onChange={handleInputChange} placeholder="Email" required /> 
-            <input type="password" name="password" value={formData.password} onChange={handleInputChange} placeholder="Password" required/> 
-            <input type="text" name="full_name" value={formData.full_name} onChange={handleInputChange} placeholder="Full Name" /> 
-            <input type="text" name="bio" value={formData.bio} onChange={handleInputChange} placeholder="Bio" />
-            <input type="text" name="profile_picture_url" value={formData.profile_picture_url} onChange={handleInputChange} placeholder="Profile Picture URL" />
-            <button onClick={handleSave}>{editUser ? 'Update User' : 'Add User'}</button>
-            {editUser && <button onClick={handleCancel}>Cancel</button>}
+            <Stack spacing={3}>
+                <Input type="text" name="username" value={formData.username} onChange={handleInputChange} placeholder="Username" required />
+                <Input type="email" name="email" value={formData.email} onChange={handleInputChange} placeholder="Email" required /> 
+                <Input type="password" name="password" value={formData.password} onChange={handleInputChange} placeholder="Password" required/> 
+                <Input type="text" name="full_name" value={formData.full_name} onChange={handleInputChange} placeholder="Full Name" /> 
+                <Input type="text" name="bio" value={formData.bio} onChange={handleInputChange} placeholder="Bio" />
+                <Input type="text" name="profile_picture_url" value={formData.profile_picture_url} onChange={handleInputChange} placeholder="URl of Profile Picture" />
+                <button onClick={handleSave}>{editUser ? 'Update User' : 'Add User'}</button>
+                {editUser && <button onClick={handleCancel}>Cancel</button>}
+            </Stack>
             <ul>
                 {users.map(user => (
                     <li key={user.id}>

@@ -2,29 +2,33 @@
 import React from 'react';
 import UserDashboard from '../components/userDashboard';
 
-// Asynchronous function to fetch user data from the backend
-async function fetchUsers() {
+const fetchUsers = async (skip = 0, limit = 10) => {
     const token = process.env.JWT_TOKEN;
 
-    const res = await fetch('http://localhost:8000/api/users', {
+    try{
+    const res = await fetch(`http://localhost:8000/api/users/?skip=${skip}&limit=${limit}`, {
+        method: 'GET',
         headers: {
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
         }
     });
     if (!res.ok) {
         // If the response is not ok, throw an error to trigger the nearest error boundary
         throw new Error('Failed to fetch users');
     }
-
-    // Parse the JSON response
-    return res.json();
-}
+    const data  = await res.json();
+    return data;
+}catch(error){
+    console.error('Error fetching users:', error);
+    return { items: [], pagination: {} };
+    }
+};
 
 // The main component for the page, executed server-side
 export default async function Page() {
     try {
-        // Retrieve user data via the fetchUsers function
-        const users = await fetchUsers();
+        const { items: users, pagination } = await fetchUsers();  // Destructure to get users and pagination
 
         // Render the component with fetched data
         return (
