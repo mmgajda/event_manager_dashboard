@@ -1,0 +1,100 @@
+'use client'
+// components/UserDashboard.js
+import React, { useState } from 'react';
+
+function UserDashboard({ initialUsers }) {
+    const [users, setUsers] = useState(initialUsers);
+    const [editUserId, setEditUserId] = useState(null);
+    const [formData, setFormData] = useState({ username: '', email: '' });
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const handleEdit = (user) => {
+        setEditUserId(user.id);
+        setFormData({ username: user.username, email: user.email });
+    };
+
+    const handleDelete = async (userId) => {
+        try {
+            const res = await fetch(`http://localhost:8000/api/users/${userId}`, {
+                method: 'DELETE'
+            });
+            if (!res.ok) throw new Error('Failed to delete the user.');
+            setUsers(users.filter(user => user.id !== userId));
+        } catch (error) {
+            console.error('Error deleting user:', error);
+        }
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const method = editUserId ? 'PUT' : 'POST';
+        const url = editUserId ? `http://localhost:8000/api/users/${editUserId}` : 'http://localhost:8000/api/users/';
+
+        try {
+            const res = await fetch(url, {
+                method,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+            if (!res.ok) throw new Error('Failed to process the user.');
+
+            const updatedUser = await res.json();
+            if (editUserId) {
+                setUsers(users.map(user => user.id === editUserId ? updatedUser : user));
+            } else {
+                setUsers([...users, updatedUser]);
+            }
+            // Reset form
+            setEditUserId(null);
+            setFormData({ username: '', email: '' });
+        } catch (error) {
+            console.error('Error processing user:', error);
+        }
+    };
+
+    const handleCancel = () => {
+        setEditUserId(null);
+        setFormData({ username: '', email: '' });
+    };
+
+    return (
+        <div>
+            <h1>User Dashboard</h1>
+            <form onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    name="username"
+                    value={formData.username}
+                    onChange={handleInputChange}
+                    placeholder="Username"
+                    required
+                />
+                <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    placeholder="Email"
+                    required
+                />
+                <button type="submit">{editUserId ? 'Update User' : 'Add User'}</button>
+                {editUserId && <button type="button" onClick={handleCancel}>Cancel</button>}
+            </form>
+            <ul>
+                {users.map(user => (
+                    <li key={user.id}>
+                        {user.username} - {user.email}
+                        <button onClick={() => handleEdit(user)}>Edit</button>
+                        <button onClick={() => handleDelete(user.id)}>Delete</button>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+}
+
+export default UserDashboard;

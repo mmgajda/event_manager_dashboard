@@ -1,14 +1,20 @@
 {
   "pages": {
-    "/page": [
+    "/userdashboard/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/page.js"
+      "static/chunks/app/userdashboard/page.js"
+    ],
+    "/userdashboard/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/userdashboard/layout.css",
+      "static/chunks/app/userdashboard/layout.js"
     ],
     "/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/css-app_globals_css-node_modules_next_font_google_target_css.css",
+      "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ]
   }
