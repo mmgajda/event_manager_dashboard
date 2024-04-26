@@ -26,3 +26,9 @@ package-lock.json
 # Build artifacts
 out/
 
+.cache
+.idea
+.next
+yarn-error.log
+npm-debug.log
+
