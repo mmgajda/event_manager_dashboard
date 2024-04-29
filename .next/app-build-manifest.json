@@ -1,26 +1,21 @@
 {
   "pages": {
-    "/page": [
+    "/usermanagement/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/page.js"
+      "static/chunks/app/usermanagement/page.js"
+    ],
+    "/usermanagement/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/usermanagement/layout.css",
+      "static/chunks/app/usermanagement/layout.js"
     ],
     "/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
-    ],
-    "/userdashboard/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/userdashboard/page.js"
-    ],
-    "/userdashboard/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/userdashboard/layout.css",
-      "static/chunks/app/userdashboard/layout.js"
     ]
   }
 }
