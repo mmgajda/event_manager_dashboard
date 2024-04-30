@@ -6,7 +6,7 @@ const fetchUsers = async (skip = 0, limit = 10) => {
     const token = process.env.JWT_TOKEN;
 
     try{
-    const res = await fetch(`http://localhost:8000/api/users/?skip=${skip}&limit=${limit}`, {
+    const res = await fetch(`NEXT_PUBLIC_API_URl/users/?skip=${skip}&limit=${limit}`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`,

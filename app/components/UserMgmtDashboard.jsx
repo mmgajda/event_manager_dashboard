@@ -23,8 +23,8 @@ const UserDashboard = ({ initialUsers }) => {
 // Add or update user
 const handleSave = async () => {
     const method = editUser ? 'PUT' : 'POST';
-    const url = editUser ? `http://localhost:8000/api/users/${editUser.id}` : 'http://localhost:8000/api/users/';
-
+    //const url = editUser ? `http://localhost:8000/api/users/${editUser.id}` : 'http://localhost:8000/api/users/';
+    const url = 'http://localhost:8000/api/users/'
     console.log("Sending data:", formData);  // Debug: Log data being sent
 
     try {
