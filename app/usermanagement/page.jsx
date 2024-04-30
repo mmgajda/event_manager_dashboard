@@ -1,4 +1,3 @@
-// app/page.js
 import React from 'react';
 import UserDashboard from '../components/UserMgmtDashboard';
 
