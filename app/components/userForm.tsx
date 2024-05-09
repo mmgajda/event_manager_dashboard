@@ -4,9 +4,9 @@ import { useState, useEffect } from 'react';
 
 const UserForm = ({ onSave }: { onSave: (data: any) => void }, initialData = {}) => {
     const [formData, setFormData] = useState({
-        username: '',
         email: '',
-        full_name: '',
+        first_name: '',
+        last_name: '',
         bio: '',
         profile_picture_url: '',
         password: ''
@@ -27,9 +27,9 @@ const UserForm = ({ onSave }: { onSave: (data: any) => void }, initialData = {})
     const handleSubmit = () => {
         onSave(formData);
         setFormData({
-            username: '',
             email: '',
-            full_name: '',
+            first_name: '',
+            last_name: '',
             bio: '',
             profile_picture_url: '',
             password: ''
@@ -38,10 +38,10 @@ const UserForm = ({ onSave }: { onSave: (data: any) => void }, initialData = {})
 
     return (
         <Stack spacing={3}>
-            <Input name="username" value={formData.username} onChange={handleInputChange} placeholder="Username" required />
             <Input name="email" value={formData.email} onChange={handleInputChange} placeholder="Email" required />
             <Input name="password" value={formData.password} onChange={handleInputChange} placeholder="Password" required />
-            <Input name="full_name" value={formData.full_name} onChange={handleInputChange} placeholder="Full Name" />
+            <Input name="first_name" value={formData.first_name} onChange={handleInputChange} placeholder="First Name" />
+            <Input name="last_name" value={formData.last_name} onChange={handleInputChange} placeholder="Last Name" />
             <Input name="bio" value={formData.bio} onChange={handleInputChange} placeholder="Bio" />
             <Input name="profile_picture_url" value={formData.profile_picture_url} onChange={handleInputChange} placeholder="Profile Picture URL" />
             <Button onClick={handleSubmit}>{(initialData as { id?: string | number }).id ? 'Update User' : 'Add User'}</Button>

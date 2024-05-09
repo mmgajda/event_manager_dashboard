@@ -1,5 +1,6 @@
 import { Heading, Image } from '@chakra-ui/react';
 import UserDashboard from '../components/UserMgmtDashboard';
+import Hero2 from '../components/Hero2';
 
 const fetchUsers = async () => {
     try {
@@ -21,16 +22,8 @@ export default async function AdminPage() {
 
     return (
         <>
-            {/* Banner Section */}
-            <Image
-                src="/banner.jpg" // Adjust to your banner image URL
-                alt="Banner"
-                objectFit="cover"
-                width="100%"
-                height="200px"
-                mb={6}
-                borderRadius="md"
-            />
+        <Hero2 />
+            
             <Heading mb={4}>Welcome, Admin User!</Heading>
 
             {/* User Management Dashboard */}
